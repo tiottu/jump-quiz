@@ -1,0 +1,12 @@
+{
+  "name": "점프퀴즈!",
+  "short_name": "점프퀴즈",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#fdf6ff",
+  "theme_color": "#a34bd1",
+  "icons": [
+    { "src": "icon.png", "sizes": "256x256", "type": "image/png" }
+  ]
+}
