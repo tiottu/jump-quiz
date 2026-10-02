@@ -1,1 +1,56 @@
-index.html
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>점프퀴즈!</title>
+<!-- 📱 핸드폰 홈 화면에 앱처럼 추가할 수 있게 -->
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#a34bd1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="점프퀴즈">
+<!-- 🔤 귀여운 글꼴 "주아체" 가져오기 (인터넷이 없으면 원래 글꼴로 나와) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🎈 점프퀴즈! 🧹</h1>
+<div>👇 캐릭터를 골라줘!</div>
+<div id="characters"></div>
+<div id="grades">📚 수학 문제: </div>
+<div id="stage">
+  <canvas id="game" width="800" height="300"></canvas>
+  <div id="quiz">
+    <div id="quizTitle"></div>
+    <div id="quizQuestion"></div>
+    <div id="quizChoices"></div>
+    <div id="quizResult"></div>
+    <button id="quizNext">계속 달리기 ▶</button>
+  </div>
+</div>
+<div id="help">스페이스바 또는 화면을 눌러서 점프! (📱 핸드폰은 화면을 톡!)<br>🎈 풍선을 잡으면 꾹 눌러서 날 수 있어!</div>
+
+<button id="guideBtn">📖 게임 방법</button>
+
+<!-- 📖 게임 방법 창 (버튼을 누르면 나와. 글은 아래 script에서 채워 넣어) -->
+<div id="guideModal">
+  <div id="guideCard">
+    <h2>📖 게임 방법</h2>
+    <div id="guideText"></div>
+    <button id="guideClose">알겠어! 👍</button>
+  </div>
+</div>
+
+<!-- 🧩 게임 파일들 (순서가 중요해! 위에서부터 차례로 불러와) -->
+<script src="settings.js"></script>
+<script src="characters.js"></script>
+<script src="quiz.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

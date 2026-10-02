@@ -1,0 +1,177 @@
+/* 🎨 모양 파일 — 색깔, 크기, 캐릭터 칸 모양이 여기 있어! */
+/* (index.html 이 이 파일을 불러와서 써) */
+
+  body {
+    margin: 0;
+    font-family: "Jua", "Malgun Gothic", sans-serif;
+    background: #fdf6ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;          /* 핸드폰에서 꾹 눌러도 메뉴가 안 뜨게 */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;           /* 두 번 톡톡 눌러도 화면이 커지지 않게 */
+  }
+  h1 { color: #a34bd1; margin: 16px 0 8px; font-size: 40px; }
+  /* 주아체는 원래 도톰해서 굵게 안 해도 돼 */
+  h1 { font-weight: normal; }
+  #characters { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; padding: 20px 10px 6px; }
+
+  /* 캐릭터 칸 (동그란 얼굴 + 캐릭터마다 다른 귀, 뿔, 꼬리!) */
+  .char {
+    --line: #d8d8d8;   /* 테두리랑 귀 색깔 */
+    --bg: white;       /* 안쪽 색깔 */
+    position: relative;
+    font-size: 30px;
+    width: 56px; height: 56px;
+    padding: 0;
+    border: 3px solid var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .char:hover { transform: scale(1.08); }
+  .char.selected { --line: #ff5fa2; --bg: #ffe3f0; transform: scale(1.15); }
+
+  /* 캐릭터를 고르면 나오는 테두리 색깔 (캐릭터마다 달라!) */
+  .rabbit.selected  { --line: #9e9e9e; --bg: #f1f1f1; }   /* 🐰 회색 */
+  .dog.selected     { --line: #a0662f; --bg: #f5e6d6; }   /* 🐶 갈색 */
+  .cat.selected     { --line: #f2c200; --bg: #fff7cc; }   /* 🐱 노란색 */
+  .fox.selected     { --line: #f07a24; --bg: #ffe8d6; }   /* 🦊 주황색 */
+  .lizard.selected,
+  .dino.selected,
+  .mantis.selected  { --line: #3fae3a; --bg: #e2f7df; }   /* 🦎🦖🦗 초록색 */
+  .hamster.selected { --line: #b5793f; --bg: #f7ead9; }   /* 🐹 갈색 */
+  .char::before, .char::after { content: ""; position: absolute; background: var(--line); }
+
+  /* 🐱 고양이: 뾰족한 세모 귀 */
+  .cat::before, .cat::after { width: 16px; height: 16px; top: -11px; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+  .cat::before { left: 5px; }
+  .cat::after  { right: 5px; }
+
+  /* 🦊 여우: 길고 뾰족한 귀 */
+  .fox::before, .fox::after { width: 16px; height: 22px; top: -17px; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+  .fox::before { left: 3px; }
+  .fox::after  { right: 3px; }
+
+  /* 🐰 토끼: 길쭉한 귀 */
+  .rabbit::before, .rabbit::after { width: 11px; height: 26px; top: -22px; border-radius: 50%; }
+  .rabbit::before { left: 12px; transform: rotate(-8deg); }
+  .rabbit::after  { right: 12px; transform: rotate(8deg); }
+
+  /* 🐹 햄스터: 작고 동그란 귀 */
+  .hamster::before, .hamster::after { width: 16px; height: 16px; top: -6px; border-radius: 50%; }
+  .hamster::before { left: 1px; }
+  .hamster::after  { right: 1px; }
+
+  /* 🐶 강아지: 옆으로 축 처진 귀 */
+  .dog::before, .dog::after { width: 14px; height: 26px; top: 0; border-radius: 50%; }
+  .dog::before { left: -9px; transform: rotate(20deg); }
+  .dog::after  { right: -9px; transform: rotate(-20deg); }
+
+  /* 🦄 유니콘: 반짝이는 황금 뿔 */
+  .unicorn::before { width: 12px; height: 22px; top: -20px; left: 19px; background: #ffc94d; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+  .unicorn::after { display: none; }
+
+  /* 🦖 공룡: 등에 난 뾰족뾰족 가시 */
+  .dino::before { width: 38px; height: 12px; top: -11px; left: 6px; background: #6cc24a; clip-path: polygon(0 100%, 16% 0, 33% 100%, 50% 0, 67% 100%, 84% 0, 100% 100%); }
+  .dino::after { display: none; }
+
+  /* 🦎 도마뱀: 길쭉한 몸 + 꼬리 */
+  .lizard { width: 66px; border-radius: 30px; }
+  .lizard::before { display: none; }
+  .lizard::after { width: 16px; height: 12px; top: 19px; right: -15px; clip-path: polygon(0 0, 100% 50%, 0 100%); }
+
+  /* 🦗 사마귀: 세모 얼굴 + 더듬이 */
+  .mantis { border-radius: 45% 45% 50% 50% / 30% 30% 70% 70%; }
+  .mantis::before, .mantis::after { width: 2px; height: 18px; top: -16px; background: #3c8f26; }
+  .mantis::before { left: 18px; transform: rotate(-25deg); }
+  .mantis::after  { right: 18px; transform: rotate(25deg); }
+  #stage { position: relative; max-width: 95vw; touch-action: none; }   /* 게임 화면에서는 꾹 눌러도 화면이 안 움직이게 */
+  canvas { display: block; border-radius: 20px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); max-width: 95vw; height: auto; }
+  #help { color: #666; margin: 10px; font-size: 18px; text-align: center; }
+
+  /* 📱 핸드폰처럼 작은 화면에서는 글씨랑 칸을 조금 작게 */
+  @media (max-width: 600px) {
+    h1 { font-size: 30px; margin-top: 10px; }
+    #characters { gap: 12px; padding: 16px 6px 4px; }
+    #help { font-size: 14px; }
+    #quizTitle { font-size: 15px; }
+    #quizQuestion { font-size: 18px; margin: 4px 10px 8px; }
+    .choice { font-size: 15px; min-width: 70px; padding: 5px 8px; border-radius: 12px; }
+    #quizChoices { gap: 6px; }
+    #quizResult { font-size: 15px; margin-top: 6px; min-height: 18px; }
+    #quizNext { font-size: 15px; padding: 5px 14px; margin-top: 4px; }
+  }
+
+  /* 📖 게임 방법 버튼 */
+  #guideBtn {
+    font-family: inherit; font-size: 20px;
+    padding: 8px 22px; margin-bottom: 30px;
+    border: none; border-radius: 16px;
+    background: #a34bd1; color: white; cursor: pointer;
+    box-shadow: 0 4px 0 #7a2fa3;
+  }
+  #guideBtn:hover { transform: translateY(-2px); }
+  #guideBtn:active { transform: translateY(2px); box-shadow: 0 2px 0 #7a2fa3; }
+
+  /* 📖 게임 방법 창 */
+  #guideModal {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(80, 40, 100, 0.45);
+    align-items: center; justify-content: center;
+    z-index: 10;
+  }
+  #guideModal.show { display: flex; }
+  #guideCard {
+    width: 620px; max-width: 90vw; max-height: 85vh; overflow-y: auto;
+    padding: 20px 24px; text-align: center;
+    background: white; border: 4px dashed #ffb3de; border-radius: 24px;
+  }
+  #guideCard h2 { margin: 0 0 8px; color: #a34bd1; font-weight: normal; font-size: 30px; }
+  #guideText { text-align: left; margin-bottom: 16px; word-break: keep-all; }
+  .step { display: flex; gap: 12px; align-items: flex-start; padding: 8px 4px; border-bottom: 1px dotted #f0d6ea; }
+  .step:last-child { border-bottom: none; }
+  .step .icon { font-size: 28px; width: 40px; text-align: center; flex-shrink: 0; }
+  .step .title { font-size: 20px; color: #e0457b; }
+  .step .desc { font-size: 16px; color: #555; line-height: 1.5; }
+  #guideClose {
+    font-family: inherit; font-size: 20px;
+    padding: 8px 26px; border: none; border-radius: 14px;
+    background: #ff5fa2; color: white; cursor: pointer;
+  }
+
+  /* 학년 고르기 */
+  #grades { display: flex; gap: 6px; align-items: center; margin-bottom: 12px; flex-wrap: wrap; justify-content: center; }
+  .grade { font-size: 16px; padding: 6px 12px; border: 3px solid #ddd; border-radius: 12px; background: white; cursor: pointer; font-family: inherit; }
+  .grade.selected { border-color: #4a9dff; background: #e3f0ff; }
+
+  /* 퀴즈 창 */
+  #quiz {
+    display: none;
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.93);
+    border-radius: 20px;
+    flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  #quiz.show { display: flex; }
+  #quizTitle { font-size: 22px; color: #a34bd1; }
+  #quizQuestion { font-size: 32px; margin: 10px 20px 16px; color: #333; }
+  #quizChoices { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .choice {
+    font-size: 22px; font-family: inherit; min-width: 120px; padding: 10px 16px;
+    border: 3px solid #ffb3de; border-radius: 16px; background: #fff0f7; cursor: pointer;
+  }
+  .choice:hover { background: #ffd6ea; }
+  .choice.right { background: #b8f5b0; border-color: #3bb54a; }
+  .choice.wrong { background: #ffc4c4; border-color: #ff5b5b; }
+  #quizResult { font-size: 24px; margin-top: 14px; min-height: 30px; }
+  #quizNext {
+    display: none; margin-top: 8px; font-size: 20px; font-family: inherit; padding: 8px 20px;
+    border: none; border-radius: 14px; background: #a34bd1; color: white; cursor: pointer;
+  }
